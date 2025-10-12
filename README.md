@@ -1,7 +1,7 @@
 # Fitness Project
 
 A **Flask-based fitness management web application** that helps users track workouts, diet plans, and overall fitness progress.  
-The project is designed to demonstrate CRUD operations, database integration, and a clean front-end interface using HTML, CSS, and JavaScript.
+The project is designed to demonstrate CRUD operations, database integration, and a clean front-end interface using React
 
 ## Features
 
@@ -17,7 +17,7 @@ The project is designed to demonstrate CRUD operations, database integration, an
 
 | Category | Technologies Used |
 |-----------|------------------|
-| **Frontend** | HTML, CSS, JavaScript, Bootstrap |
+| **Frontend** | React, Tailwind |
 | **Backend** | Python, Flask |
 | **Database** | SQLite / MySQL |
 | **Tools** | Git, GitHub, VS Code |
