@@ -1,10 +1,34 @@
 const RegisterPage = ({ switchToLogin, onRegister }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    // Here you would save the user to backend
-    onRegister(email);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  const name = e.target.name.value;
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+  const confirmPassword = e.target.confirmPassword.value;
+
+  if (password !== confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://127.0.0.1:5000/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      onRegister(email); // Go to dashboard after successful registration
+    } else {
+      alert(data.message || "Registration failed");
+    }
+  } catch (error) {
+    alert("Error connecting to server. Check if Flask backend is running.");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500">

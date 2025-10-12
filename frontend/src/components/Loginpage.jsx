@@ -1,10 +1,27 @@
 const LoginPage = ({ switchToRegister, onLogin }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    // Here you would validate credentials with backend
-    onLogin(email);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  const email = e.target.email.value;
+  const password = e.target.password.value;
+
+  try {
+    const response = await fetch("http://127.0.0.1:5000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      onLogin(data.email);
+    } else {
+      alert(data.message || "Login failed");
+    }
+  } catch (error) {
+    alert("Error connecting to server. Check if Flask backend is running.");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600">
