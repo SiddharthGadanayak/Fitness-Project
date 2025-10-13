@@ -1,15 +1,13 @@
 import { useState } from "react";
-import LoginPage from "./components/loginpage";
-import RegisterPage from "./components/RegisterPage";
+import IsLogin from "./components/isLogin";
 import DashboardPage from "./components/Dashboardpage";
 
 function App() {
-  const [page, setPage] = useState("login"); // login | register | dashboard
+  const [page, setPage] = useState("login");
   const [user, setUser] = useState(null); // store user info
 
-  // Simulate login
-  const handleLogin = (email) => {
-    setUser({ email });
+  const handleAuthSuccess = (userInfo) => {
+    setUser(userInfo);
     setPage("dashboard");
   };
 
@@ -21,21 +19,11 @@ function App() {
 
   return (
     <>
-      {page === "login" && (
-        <LoginPage
-          switchToRegister={() => setPage("register")}
-          onLogin={handleLogin}
-        />
-      )}
-      {page === "register" && (
-        <RegisterPage
-          switchToLogin={() => setPage("login")}
-          onRegister={handleLogin} // after registration, go to dashboard
-        />
-      )}
+      {page === "login" && <IsLogin onAuthSuccess={handleAuthSuccess} />}
       {page === "dashboard" && <DashboardPage user={user} onLogout={handleLogout} />}
     </>
   );
+
 }
 
 export default App;

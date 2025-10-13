@@ -24,7 +24,7 @@ const LoginPage = ({ switchToRegister, onLogin }) => {
 };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600">
+    <div className="min-h-screen flex items-center justify-center gradient-primary">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login</h2>
         <form className="space-y-5" onSubmit={handleSubmit}>
@@ -48,7 +48,7 @@ const LoginPage = ({ switchToRegister, onLogin }) => {
           </div>
           <button
             type="submit"
-            className="w-full bg-indigo-500 text-white py-2 rounded-xl font-semibold hover:bg-indigo-600 transition"
+            className="w-full gradient-primary text-white py-2 rounded-xl font-semibold hover:opacity-90 transition"
           >
             Login
           </button>
@@ -57,9 +57,9 @@ const LoginPage = ({ switchToRegister, onLogin }) => {
           Don't have an account?{" "}
           <button
             onClick={switchToRegister}
-            className="text-indigo-500 font-semibold hover:underline"
+            className="text-primary font-semibold hover:underline"
           >
-            Register
+            Sign Up
           </button>
         </p>
       </div>
