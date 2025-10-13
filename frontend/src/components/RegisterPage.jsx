@@ -31,9 +31,9 @@ const RegisterPage = ({ switchToLogin, onRegister }) => {
 };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500">
+    <div className="min-h-screen flex items-center justify-center gradient-primary">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Register</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Sign Up</h2>
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
             <label className="block text-gray-600 font-semibold mb-2">Full Name</label>
@@ -73,16 +73,16 @@ const RegisterPage = ({ switchToLogin, onRegister }) => {
           </div>
           <button
             type="submit"
-            className="w-full bg-green-500 text-white py-2 rounded-xl font-semibold hover:bg-green-600 transition"
+            className="w-full gradient-primary text-white py-2 rounded-xl font-semibold hover:opacity-90 transition"
           >
-            Register
+            Create Account
           </button>
         </form>
         <p className="text-center text-gray-500 text-sm mt-6">
           Already have an account?{" "}
           <button
             onClick={switchToLogin}
-            className="text-green-500 font-semibold hover:underline"
+            className="text-primary font-semibold hover:underline"
           >
             Login
           </button>
