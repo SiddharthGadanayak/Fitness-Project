@@ -12,6 +12,13 @@ def create_app():
     db.init_app(app)
 
     from .routes import auth_routes
+    from .routes import bmi_bp
+    
+    app.register_blueprint(bmi_bp)
     app.register_blueprint(auth_routes)
+    
+    @app.route('/')
+    def home():
+        return {"message": "Welcome to Personalized Diet & Fitness API"}
 
     return app
