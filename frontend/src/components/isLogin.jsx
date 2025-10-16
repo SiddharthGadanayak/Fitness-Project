@@ -58,8 +58,8 @@ const IsLogin = ({ onAuthSuccess }) => {
 };
 
   return (
-    <div className="min-h-screen flex items-center justify-center gradient-primary">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#f3fcfa]">
+      <div className="bg-white rounded-2xl shadow-md w-full max-w-md p-8">
         {/* Tab-style Toggle */}
         <div className="flex bg-green-50 rounded-xl p-1 w-full mb-6">
           <button
@@ -67,7 +67,7 @@ const IsLogin = ({ onAuthSuccess }) => {
             onClick={() => setIsLogin(true)}
             className={`flex-1 py-2 font-semibold rounded-lg transition ${
               isLogin
-                ? "bg-white shadow text-green-900"
+                ? "bg-white shadow-sm text-green-900"
                 : "bg-transparent text-green-600"
             }`}
           >
@@ -78,7 +78,7 @@ const IsLogin = ({ onAuthSuccess }) => {
             onClick={() => setIsLogin(false)}
             className={`flex-1 py-2 font-semibold rounded-lg transition ${
               !isLogin
-                ? "bg-white shadow text-green-900"
+                ? "bg-white shadow-sm text-green-900"
                 : "bg-transparent text-green-600"
             }`}
           >

@@ -1,10 +1,12 @@
 from flask import Blueprint, request, jsonify
 from utils.bmi_bmr import calculate_bmi, calculate_bmr
+from utils.meal_plan_recommendation import recommend_meals, final_df
 from . models import User
 from . import db
 
 auth_routes = Blueprint("auth_routes", __name__)
 bmi_bp = Blueprint('bmi_bp', __name__)
+meal_bp = Blueprint("meal_bp", __name__)
 
 # Test Message
 @auth_routes.route("/", methods=["GET"])
@@ -62,3 +64,32 @@ def get_bmi_bmr():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+    
+# Meal Recommendation System
+@meal_bp.route('/api/recommend-meals', methods=['POST'])
+def recommend_meals_api():
+    try:
+        data = request.get_json(force=True)
+        calorie_target = data.get("calorie_target")
+        diet_type = data.get("diet")
+        course = data.get("course")
+        flavor = data.get("flavor")
+        top_n = data.get("top_n", 5)
+
+        results = recommend_meals(
+            user_preferences=data,
+            dataframe=final_df,
+            calorie_target=calorie_target,
+            diet_type=diet_type,
+            course=course,
+            flavor=flavor,
+            top_n=top_n
+        )
+
+        if results.empty:
+            return jsonify({"message": "No matching meals found"}), 404
+
+        return jsonify(results.to_dict(orient="records"))
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

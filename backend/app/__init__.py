@@ -13,9 +13,11 @@ def create_app():
 
     from .routes import auth_routes
     from .routes import bmi_bp
+    from .routes import meal_bp
     
     app.register_blueprint(bmi_bp)
     app.register_blueprint(auth_routes)
+    app.register_blueprint(meal_bp)
     
     @app.route('/')
     def home():
