@@ -1,4 +1,16 @@
+import React, { useEffect, useState } from "react";
+
 const DashboardPage = ({ user, onLogout }) => {
+  const [metrics, setMetrics] = useState({ bmi: "--", bmr: "--" });
+
+  useEffect(() => {
+    if(user && user.email){
+      fetch(`http://127.0.0.1:5000/bmi_bmr/dashboard?email=${user.email}`)
+      .then(res => res.json())
+      .then(data => setMetrics({ bmi: data.bmi, bmr: data.bmr }))
+      .catch(() => setMetrics({ bmi: "Error", bmr: "Error" }));
+    }
+  }, [user]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 to-secondary/5">
@@ -22,26 +34,26 @@ const DashboardPage = ({ user, onLogout }) => {
             <span role="img" aria-label="User" className="text-4xl">👤</span>
           </div>
           <div className="flex-1">
-            <h2 className="text-3xl font-bold mb-2">Welcome back, --!</h2>
+            <h2 className="text-3xl font-bold mb-2">Welcome back, {user.name}!</h2>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
               <div>
-                <span className="text-muted-foreground">Age: </span> <span className="font-semibold">--</span>
+                <span className="text-muted-foreground">Age: </span> <span className="font-semibold">{user.age}</span>
               </div>
               <div>
                 <span className="text-muted-foreground">Gender: </span>
-                <span className="font-semibold capitalize">--</span>
+                <span className="font-semibold capitalize">{user.gender}</span>
               </div>
               <div>
                 <span className="text-muted-foreground">Weight: </span>
-                <span className="font-semibold">-- kg</span>
+                <span className="font-semibold">{user.weight} kg</span>
               </div>
               <div>
                 <span className="text-muted-foreground">Height: </span>
-                <span className="font-semibold">--- cm</span>
+                <span className="font-semibold">{user.height} cm</span>
               </div>
               <div>
                 <span className="text-muted-foreground">Goal: </span>
-                <span className="font-semibold capitalize">--</span>
+                <span className="font-semibold capitalize">Maintenance</span>
               </div>
             </div>
           </div>
@@ -63,7 +75,7 @@ const DashboardPage = ({ user, onLogout }) => {
               <span className="text-sm font-medium">BMI</span>
               {/* Placeholder for Icon */}
             </div>
-            <div className="text-2xl font-bold">--</div>
+            <div className="text-2xl font-bold">{metrics.bmi}</div>
             <p className="text-xs text-muted-foreground">Body Mass Index</p>
           </div>
           <div className="bg-white rounded-2xl shadow p-4 hover:shadow-lg transition">
@@ -71,7 +83,7 @@ const DashboardPage = ({ user, onLogout }) => {
               <span className="text-sm font-medium">BMR</span>
               {/* Placeholder for Icon */}
             </div>
-            <div className="text-2xl font-bold">--</div>
+            <div className="text-2xl font-bold">{metrics.bmr}</div>
             <p className="text-xs text-muted-foreground">Basal Metabolic Rate</p>
           </div>
           <div className="bg-white rounded-2xl shadow p-4 hover:shadow-lg transition">
